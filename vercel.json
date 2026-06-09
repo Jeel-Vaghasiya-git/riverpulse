@@ -1,8 +1,24 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/((?!api/).*)",
-      "destination": "/index.html"
+      "src": "/gangapulse-api/(.*)",
+      "dest": "/api/gangapulse.js?path=$1"
+    },
+    {
+      "src": "/datagov-api/(.*)",
+      "dest": "/api/datagov.js?path=$1"
+    },
+    {
+      "src": "/cpcb-api/(.*)",
+      "dest": "/api/cpcb.js?path=$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }

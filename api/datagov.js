@@ -1,6 +1,6 @@
 export const config = {
   api: {
-    bodyParser: false,
+    bodyParser: false, // Disable automatic body parsing to forward raw bodies correctly
   },
 };
 
@@ -19,12 +19,16 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Parse path and query parameters
+  // Parse target path and query parameters
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
-  const targetPath = url.pathname.replace(/^\/api\/gangapulse/, '');
-  const targetUrl = `https://www.gangapulse.in${targetPath}${url.search}`;
+  const pathParam = url.searchParams.get('path') || '';
+  url.searchParams.delete('path');
+  const searchString = url.search;
+  
+  // Reconstruct the upstream target URL
+  const targetUrl = `https://api.data.gov.in/${pathParam}${searchString}`;
 
-  // Read raw body if present
+  // Read the raw request body if present
   let body = undefined;
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     const chunks = [];
@@ -43,7 +47,7 @@ export default async function handler(req, res) {
       headers[key] = value;
     }
   }
-  headers['host'] = 'www.gangapulse.in';
+  headers['host'] = 'api.data.gov.in';
 
   try {
     const response = await fetch(targetUrl, {
@@ -53,6 +57,7 @@ export default async function handler(req, res) {
       redirect: 'follow',
     });
 
+    // Copy response headers back (excluding standard Access-Control headers to avoid conflicts)
     response.headers.forEach((value, key) => {
       const lowerKey = key.toLowerCase();
       if (!lowerKey.startsWith('access-control-')) {
@@ -61,10 +66,12 @@ export default async function handler(req, res) {
     });
 
     res.status(response.status);
+
+    // Read the response as an ArrayBuffer and send it
     const responseBuffer = await response.arrayBuffer();
     res.send(Buffer.from(responseBuffer));
   } catch (error) {
-    console.error('Gangapulse Proxy Error:', error);
+    console.error('DataGov Proxy Error:', error);
     res.status(500).json({ error: 'Proxy request failed', details: error.message });
   }
 }

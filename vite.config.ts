@@ -10,21 +10,21 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      '/api/gangapulse': {
+      '/gangapulse-api': {
         target: 'https://www.gangapulse.in',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/gangapulse/, ''),
+        rewrite: (path) => path.replace(/^\/gangapulse-api/, ''),
       },
-      '/api/datagov': {
+      '/datagov-api': {
         target: 'https://api.data.gov.in',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/datagov/, ''),
+        rewrite: (path) => path.replace(/^\/datagov-api/, ''),
       },
-      '/api/cpcb': {
+      '/cpcb-api': {
         target: 'https://rtwqmsdb1.cpcb.gov.in',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api\/cpcb/, ''),
+        rewrite: (path) => path.replace(/^\/cpcb-api/, ''),
       },
     },
   },
