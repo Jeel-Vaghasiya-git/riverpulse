@@ -1,24 +1,24 @@
 {
-  "routes": [
-    {
-      "src": "/gangapulse-api/(.*)",
-      "dest": "/api/gangapulse.js?path=$1"
-    },
-    {
-      "src": "/datagov-api/(.*)",
-      "dest": "/api/datagov.js?path=$1"
-    },
-    {
-      "src": "/cpcb-api/(.*)",
-      "dest": "/api/cpcb.js?path=$1"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
+  "rewrites": {
+    "beforeFiles": [
+      {
+        "source": "/gangapulse-api/:path*",
+        "destination": "/api/gangapulse?path=:path*"
+      },
+      {
+        "source": "/datagov-api/:path*",
+        "destination": "/api/datagov?path=:path*"
+      },
+      {
+        "source": "/cpcb-api/:path*",
+        "destination": "/api/cpcb?path=:path*"
+      }
+    ],
+    "fallback": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }
