@@ -20,6 +20,9 @@ export default function Disclaimer() {
             not be considered an official source of information.
           </p>
         </div>
+        <div className="mt-4 text-center text-xs font-bold text-[var(--river)] opacity-60">
+          RiverPulse<span className="text-[var(--aqua)]">India</span>
+        </div>
       </div>
     </section>
   );

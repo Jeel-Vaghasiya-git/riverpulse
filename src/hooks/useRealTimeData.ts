@@ -52,7 +52,7 @@ function parseRiver(name: string, catchment: string): string {
   if (nameLower.includes('narmada')) return 'Narmada';
   if (nameLower.includes('gomti')) return 'Gomti';
   if (nameLower.includes('hooghly')) return 'Hooghly';
-  if (nameLower.includes('cauvery') || nameLower.includes('kaveri')) return 'Cauvery';
+  if (nameLower.includes('cauvery') || nameLower.includes('kaveri')) return 'Kaveri';
   if (nameLower.includes('sabarmati')) return 'Sabarmati';
   if (nameLower.includes('godavari')) return 'Godavari';
   if (nameLower.includes('krishna')) return 'Krishna';

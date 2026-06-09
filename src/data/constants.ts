@@ -59,13 +59,13 @@ export const STATES_DATA: Record<string, { cities: Record<string, string[]> }> =
   'Tamil Nadu': {
     cities: {
       'Chennai': ['Cooum at Napier Bridge', 'Adyar at Ekkaduthangal'],
-      'Trichy': ['Cauvery at Srirangam'],
+      'Trichy': ['Kaveri at Srirangam'],
     },
   },
   'Karnataka': {
     cities: {
       'Bengaluru': ['Vrishabhavathi at Byramangala', 'Arkavathi at Tippagondanahalli'],
-      'Mysuru': ['Cauvery at Krishnaraja Sagar'],
+      'Mysuru': ['Kaveri at Krishnaraja Sagar'],
     },
   },
 };
@@ -154,7 +154,7 @@ export const MONITORING_STATIONS: MonitoringStation[] = [
   { id: 's9', name: 'Mithi at Mahim Creek', state: 'Maharashtra', city: 'Mumbai', lat: 19.04, lng: 72.84, river: 'Mithi', ph: 5.8, tds: 890, turbidity: 110, temperature: 31, waterLevel: 8.5, flowRate: 2800 },
   { id: 's10', name: 'Cooum at Napier Bridge', state: 'Tamil Nadu', city: 'Chennai', lat: 13.07, lng: 80.27, river: 'Cooum', ph: 6.2, tds: 750, turbidity: 95, temperature: 32, waterLevel: 3.5, flowRate: 450 },
   { id: 's11', name: 'Ganga at Lakshman Jhula', state: 'Uttarakhand', city: 'Rishikesh', lat: 30.09, lng: 78.32, river: 'Ganga', ph: 7.0, tds: 120, turbidity: 5, temperature: 18, waterLevel: 2.4, flowRate: 920 },
-  { id: 's12', name: 'Cauvery at Srirangam', state: 'Tamil Nadu', city: 'Trichy', lat: 10.86, lng: 79.08, river: 'Cauvery', ph: 7.3, tds: 200, turbidity: 15, temperature: 28, waterLevel: 3.8, flowRate: 1050 },
+  { id: 's12', name: 'Kaveri at Srirangam', state: 'Tamil Nadu', city: 'Trichy', lat: 10.86, lng: 79.08, river: 'Kaveri', ph: 7.3, tds: 200, turbidity: 15, temperature: 28, waterLevel: 3.8, flowRate: 1050 },
   { id: 's13', name: 'Vrishabhavathi at Byramangala', state: 'Karnataka', city: 'Bengaluru', lat: 12.97, lng: 77.59, river: 'Vrishabhavathi', ph: 6.0, tds: 680, turbidity: 82, temperature: 29, waterLevel: 1.8, flowRate: 210 },
   { id: 's14', name: 'Ganga at Assi Ghat', state: 'Uttar Pradesh', city: 'Varanasi', lat: 25.29, lng: 83.01, river: 'Ganga', ph: 7.7, tds: 310, turbidity: 40, temperature: 26, waterLevel: 4.6, flowRate: 1150 },
   { id: 's15', name: 'Gomti at Lakshman Mela Ground', state: 'Uttar Pradesh', city: 'Lucknow', lat: 26.85, lng: 80.95, river: 'Gomti', ph: 7.4, tds: 270, turbidity: 35, temperature: 27, waterLevel: 3.9, flowRate: 680 },

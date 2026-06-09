@@ -49,7 +49,7 @@ const sacredBasins = [
     station: "Talakaveri / Delta Reach",
     state: "Karnataka",
     image: "/sacred_rivers/image4.jpg",
-    history: "The Cauvery River is one of the most historically significant rivers of South India, originating at Talakaveri in the Brahmagiri Hills of Kodagu, Karnataka. It formed the backbone of ancient South Indian civilizations, especially during the Chola dynasty, which developed advanced irrigation systems along its fertile delta. One of the earliest engineering marvels, the Grand Anicut (Kallanai Dam), was constructed across the river by King Karikala Chola around the 2nd century CE and remains in use even today"
+    history: "The Kaveri River is one of the most historically significant rivers of South India, originating at Talakaveri in the Brahmagiri Hills of Kodagu, Karnataka. It formed the backbone of ancient South Indian civilizations, especially during the Chola dynasty, which developed advanced irrigation systems along its fertile delta. One of the earliest engineering marvels, the Grand Anicut (Kallanai Dam), was constructed across the river by King Karikala Chola around the 2nd century CE and remains in use even today"
   }
 ];
 
@@ -100,7 +100,7 @@ export default function HomePage() {
           >
             A national pulse for India's rivers — synchronizing IoT sensor telemetry,
             satellite imagery and citizen reporting across every basin from the Ganga
-            to the Brahmaputra, the Cauvery to the Indus.
+            to the Brahmaputra, the Kaveri to the Indus.
           </motion.p>
 
           <motion.div
@@ -109,7 +109,7 @@ export default function HomePage() {
             transition={{ delay: 0.5 }}
             className="mt-8 flex flex-wrap gap-3 text-xs"
           >
-            <Pill icon={<Radio className="h-3 w-3" />} label="Live signal · 5s refresh" />
+            <Pill icon={<Radio className="h-3 w-3" />} label="Live signal · 5 min refresh" />
             <Pill icon={<Sparkles className="h-3 w-3" />} label="29 States & UTs" />
             <Pill icon={<Satellite className="h-3 w-3" />} label="Satellite-linked basins" />
           </motion.div>
@@ -123,12 +123,10 @@ export default function HomePage() {
       {/* SACRED RIVER BASINS GALLERY */}
       <section className="bg-[var(--slate-soft)] py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-12 flex items-end justify-between gap-6">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--aqua)]">Sacred Waterways</p>
-              <h2 className="mt-2 text-3xl font-bold text-[var(--river)] md:text-4xl">River Basins & Heritage</h2>
-            </div>
-            <p className="hidden max-w-sm text-sm text-muted-foreground md:block">
+          <div className="mb-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--aqua)]">Sacred Waterways</p>
+            <h2 className="mt-2 text-3xl font-bold text-[var(--river)] md:text-4xl">River Basins & Heritage</h2>
+            <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
               A glimpse into the spiritual and historical roots of our river basins — now monitored under live technological telemetry.
             </p>
           </div>

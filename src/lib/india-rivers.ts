@@ -60,9 +60,9 @@ export const stations: Station[] = [
   { id: "tg-hyd-msi", state: "Telangana", district: "Hyderabad", river: "Musi", station: "Nagole Bridge", image: img(3) },
   // Karnataka
   { id: "ka-blr-vrt", state: "Karnataka", district: "Bengaluru Urban", river: "Vrishabhavathi", station: "Nayandahalli", image: img(4) },
-  { id: "ka-msr-cvr", state: "Karnataka", district: "Mysuru", river: "Cauvery", station: "KRS Reach", image: img(5) },
+  { id: "ka-msr-cvr", state: "Karnataka", district: "Mysuru", river: "Kaveri", station: "KRS Reach", image: img(5) },
   // Tamil Nadu
-  { id: "tn-trc-cvr", state: "Tamil Nadu", district: "Tiruchirappalli", river: "Cauvery", station: "Srirangam", image: img(6) },
+  { id: "tn-trc-cvr", state: "Tamil Nadu", district: "Tiruchirappalli", river: "Kaveri", station: "Srirangam", image: img(6) },
   { id: "tn-chn-coo", state: "Tamil Nadu", district: "Chennai", river: "Cooum", station: "Napier Bridge", image: img(7) },
   // Kerala
   { id: "kl-kcc-prn", state: "Kerala", district: "Ernakulam", river: "Periyar", station: "Aluva Reach", image: img(8) },
