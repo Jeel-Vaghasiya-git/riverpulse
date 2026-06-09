@@ -57,10 +57,15 @@ export default async function handler(req, res) {
       redirect: 'follow',
     });
 
-    // Copy response headers back (excluding standard Access-Control headers to avoid conflicts)
+    // Copy response headers back (excluding Access-Control and body-related encoding headers)
     response.headers.forEach((value, key) => {
       const lowerKey = key.toLowerCase();
-      if (!lowerKey.startsWith('access-control-')) {
+      if (
+        !lowerKey.startsWith('access-control-') &&
+        lowerKey !== 'content-encoding' &&
+        lowerKey !== 'content-length' &&
+        lowerKey !== 'transfer-encoding'
+      ) {
         res.setHeader(key, value);
       }
     });

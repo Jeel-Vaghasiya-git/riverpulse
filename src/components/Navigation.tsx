@@ -27,7 +27,7 @@ function Hamburger({ open, onClick }: { open: boolean; onClick: () => void }) {
       onClick={onClick}
       aria-label="Toggle navigation"
       id="nav-hamburger"
-      className="relative z-[60] flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-full bg-white/90 dark:bg-slate-800/95 backdrop-blur shadow-md ring-1 ring-black/5 transition hover:scale-105 cursor-pointer"
+      className="relative z-[9999] flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-full bg-white/90 dark:bg-slate-800/95 backdrop-blur shadow-md ring-1 ring-black/5 transition hover:scale-105 cursor-pointer"
     >
       <motion.span
         animate={open ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
@@ -99,7 +99,7 @@ export default function Navigation() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40">
+      <header className="fixed inset-x-0 top-0 z-[9990]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <button
             onClick={() => navigate('/')}
@@ -132,7 +132,7 @@ export default function Navigation() {
             animate={{ clipPath: 'circle(160% at calc(100% - 38px) 38px)' }}
             exit={{ clipPath: 'circle(0% at calc(100% - 38px) 38px)' }}
             transition={{ type: 'spring', stiffness: 90, damping: 20 }}
-            className="fixed inset-0 z-50 bg-[var(--river)] text-white overflow-y-auto"
+            className="fixed inset-0 z-[9995] bg-[var(--river)] text-white overflow-y-auto"
           >
             <div className="mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-8 py-20">
               <div className="mb-8 flex items-center gap-2 text-sm uppercase tracking-[0.3em] text-white/70">
