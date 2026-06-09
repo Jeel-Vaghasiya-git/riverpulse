@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/gangapulse-api/:path*",
-      "destination": "/api/gangapulse?path=:path*"
+      "destination": "/api/gangapulse.js?path=:path*"
     },
     {
       "source": "/datagov-api/:path*",
-      "destination": "/api/datagov?path=:path*"
+      "destination": "/api/datagov.js?path=:path*"
     },
     {
       "source": "/cpcb-api/:path*",
-      "destination": "/api/cpcb?path=:path*"
+      "destination": "/api/cpcb.js?path=:path*"
     },
     {
       "source": "/(.*)",
