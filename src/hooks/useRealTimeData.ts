@@ -94,8 +94,8 @@ export function useRealTimeData(pollIntervalMs = 15000) {
   const fetchCpcbData = useCallback(async () => {
     try {
       const headers = { "Accept": "application/json" };
-      const stationsRes = await fetch('/cpcb-api/data/internet/stations/stations.json', { headers });
-      const layer10Res = await fetch('/cpcb-api/data/internet/layers/10/index.json', { headers });
+      const stationsRes = await fetch('/api/cpcb/data/internet/stations/stations.json', { headers });
+      const layer10Res = await fetch('/api/cpcb/data/internet/layers/10/index.json', { headers });
 
       if (!stationsRes.ok || !layer10Res.ok) {
         throw new Error(`Failed to load CPCB datasets: stations=${stationsRes.status}, layer10=${layer10Res.status}`);

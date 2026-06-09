@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import type { MonitoringStation, TimeSeriesPoint, Alert } from '../data/constants';
 
 // Target URL using the Vite development proxy we configured to bypass CORS
-const GANGA_PULSE_API_PREFIX = '/gangapulse-api';
+const GANGA_PULSE_API_PREFIX = '/api/gangapulse';
 
 interface ParameterReading {
   parameter_id: string;
