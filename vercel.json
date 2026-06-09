@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/gangapulse-api/:path*",
-      "destination": "https://www.gangapulse.in/:path*"
+      "destination": "/api/gangapulse?path=:path*"
     },
     {
       "source": "/datagov-api/:path*",
-      "destination": "https://api.data.gov.in/:path*"
+      "destination": "/api/datagov?path=:path*"
     },
     {
       "source": "/cpcb-api/:path*",
-      "destination": "https://rtwqmsdb1.cpcb.gov.in/:path*"
+      "destination": "/api/cpcb?path=:path*"
     },
     {
       "source": "/(.*)",
