@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Quote, Radio, Satellite, Sparkles, Droplets } from "lucide-react";
+import { useRealTimeData } from "../hooks/useRealTimeData";
+import { useStpRealTimeData } from "../hooks/useStpRealTimeData";
 
 // Real river basins with historical info
 const sacredBasins = [
@@ -41,7 +43,7 @@ const sacredBasins = [
     station: "Ayodhya Temple Reach",
     state: "Uttar Pradesh",
     image: "/sacred_rivers/image2.jpg",
-    history: "The Sarayu River has been central to the historical development of Ayodhya, the ancient capital of the Kosala Kingdom. For centuries, the river supported settlement, agriculture, and regional trade, while its banks became home to numerous temples and cultural landmarks that were revived and expanded during the Gupta period"
+    history: "The Sarayu River served as a vital geostrategic and commercial artery for the ancient Kosala Kingdom, anchoring protohistoric human settlements like Nahush-ka-tila and Khairadih that date back to 1000 BCE. During the Mahajanapada era, the river functioned as a critical inland waterway linking urban centers directly to the Uttarapatha trans-continental trade highway for the transport of timber, iron, and textiles. Epigraphical records, including the first-century BCE Ayodhya Inscription of Dhana and Gupta-era copper plates, document the river basin as a fortified military frontier and a highly organized administrative revenue zone known as Sarayupara."
   },
   {
     id: "kaveri",
@@ -49,11 +51,15 @@ const sacredBasins = [
     station: "Talakaveri / Delta Reach",
     state: "Karnataka",
     image: "/sacred_rivers/image4.jpg",
-    history: "The Kaveri River is one of the most historically significant rivers of South India, originating at Talakaveri in the Brahmagiri Hills of Kodagu, Karnataka. It formed the backbone of ancient South Indian civilizations, especially during the Chola dynasty, which developed advanced irrigation systems along its fertile delta. One of the earliest engineering marvels, the Grand Anicut (Kallanai Dam), was constructed across the river by King Karikala Chola around the 2nd century CE and remains in use even today"
+    history: "The Kaveri River is one of the most historically significant rivers of South India, originating at Talakaveri in the Brahmagiri Hills of Kodagu, Karnataka. It formed the backbone of ancient South Indian civilizations, especially during the Chola dynasty, which developed advanced irrigation systems along its fertile delta. One of the earliest engineering marvels, the Grand Anicut (Kallanai Dam), was constructed across the river by King Karikala Chola around the 2nd century CE and remains in use even today."
   }
 ];
 
 export default function HomePage() {
+  const { stations: cpcbStations } = useRealTimeData(60000);
+  const { stations: stpStations } = useStpRealTimeData(60000);
+  const liveCount = (cpcbStations.length && stpStations.length) ? (cpcbStations.length + stpStations.length) : 114;
+
   return (
     <div>
       {/* HERO SECTION */}
@@ -80,7 +86,7 @@ export default function HomePage() {
             className="inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs backdrop-blur"
           >
             <Satellite className="h-3 w-3 text-[var(--aqua)]" />
-            Real-time IoT telemetry · 114 stations live
+            Real-time IoT telemetry · {liveCount} stations live
           </motion.div>
 
           <motion.h1
@@ -89,7 +95,7 @@ export default function HomePage() {
             transition={{ duration: 0.9, delay: 0.1 }}
             className="mt-5 max-w-4xl text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl"
           >
-            RiverPulse<span className="text-[var(--aqua)]">India</span>
+            <span className="text-black">River</span><span className="text-[var(--aqua)]">Pulse</span><span className="text-[var(--aqua)]">India</span>
           </motion.h1>
 
           <motion.p

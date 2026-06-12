@@ -68,8 +68,24 @@ export default function ComplaintsPage() {
   }, []);
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [form, setForm] = useState({ name: "", location: "", river: "", description: "" });
-
+  const [image, setImage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 1024 * 1024) {
+        setError("Image size must be less than 1MB");
+        return;
+      }
+      setError(null);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -80,7 +96,7 @@ export default function ComplaintsPage() {
       }
 
       const complaintId = `GRV-${Math.floor(100000 + Math.random() * 900000)}`;
-      const newComplaint = {
+      const newComplaint: any = {
         id: complaintId,
         name: isAnonymous ? "Anonymous" : form.name,
         location: `${form.river}, ${form.location}`,
@@ -89,6 +105,10 @@ export default function ComplaintsPage() {
         status: "active",
         description: form.description
       };
+
+      if (image) {
+        newComplaint.image = image;
+      }
 
       await set(ref(db, `complaints/${complaintId}`), newComplaint);
 
@@ -187,6 +207,30 @@ export default function ComplaintsPage() {
                   placeholder="Describe the pollution event — discharge type, time observed, visible impact..."
                   className="mt-1 w-full rounded-lg border border-input bg-[var(--slate-soft)] p-3 text-sm outline-none ring-[var(--aqua)] focus:ring-2 text-[var(--river)] font-medium"
                 />
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Attached Photo (optional)</label>
+                <div className="mt-1 flex flex-col gap-3">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[var(--river)] file:text-white hover:file:bg-[var(--aqua)] cursor-pointer file:cursor-pointer transition-colors"
+                  />
+                  {image && (
+                    <div className="relative w-fit rounded-lg border p-1 bg-slate-50">
+                      <img src={image} className="max-h-24 w-auto object-contain rounded" alt="Grievance Attachment Preview" />
+                      <button
+                        type="button"
+                        onClick={() => setImage(null)}
+                        className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-white shadow hover:bg-rose-600 transition cursor-pointer"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
             {error && (

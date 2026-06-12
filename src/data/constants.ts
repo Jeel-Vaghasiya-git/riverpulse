@@ -209,6 +209,7 @@ export interface Complaint {
   date: string;
   status: ComplaintStatus;
   description: string;
+  image?: string;
 }
 
 export const COMPLAINTS_DATA: Complaint[] = [

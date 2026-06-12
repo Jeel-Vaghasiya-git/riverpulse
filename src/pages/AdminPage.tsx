@@ -199,9 +199,21 @@ function AdminConsole({ complaints, onResolve, isApproved }: { complaints: Compl
                     {isExpanded && (
                       <tr className="bg-slate-50/30">
                         <td colSpan={7} className="px-5 py-4">
-                          <div className="text-xs text-[var(--river)] bg-[var(--slate-soft)] p-4 rounded-xl border border-slate-100 leading-relaxed shadow-inner">
-                            <p className="font-semibold text-[10px] uppercase tracking-wider text-muted-foreground mb-1.5">Grievance Description</p>
-                            {complaint.description}
+                          <div className="flex flex-col md:flex-row gap-6 text-xs text-[var(--river)] bg-[var(--slate-soft)] p-4 rounded-xl border border-slate-100 leading-relaxed shadow-inner">
+                            <div className="flex-1">
+                              <p className="font-semibold text-[10px] uppercase tracking-wider text-muted-foreground mb-1.5">Grievance Description</p>
+                              <div className="whitespace-pre-wrap">{complaint.description}</div>
+                            </div>
+                            {complaint.image && (
+                              <div className="shrink-0 flex flex-col justify-start">
+                                <p className="font-semibold text-[10px] uppercase tracking-wider text-muted-foreground mb-1.5">Attached Photo</p>
+                                <img
+                                  src={complaint.image}
+                                  className="max-h-48 max-w-[280px] object-contain rounded-lg border bg-white shadow-sm transition hover:scale-102"
+                                  alt="Grievance evidence"
+                                />
+                              </div>
+                            )}
                           </div>
                         </td>
                       </tr>
@@ -246,7 +258,17 @@ function AdminConsole({ complaints, onResolve, isApproved }: { complaints: Compl
                       <div className="pt-3 mt-3 space-y-2 border-t border-slate-100 text-xs">
                         <p className="text-muted-foreground"><span className="font-semibold text-[var(--river)]">District:</span> {complaint.district}</p>
                         <p className="text-muted-foreground"><span className="font-semibold text-[var(--river)]">Date Filed:</span> {complaint.date}</p>
-                        <p className="text-[var(--river)] bg-[var(--slate-soft)] p-3 rounded-lg mt-2 leading-relaxed">{complaint.description}</p>
+                        <div className="text-[var(--river)] bg-[var(--slate-soft)] p-3 rounded-lg mt-2 leading-relaxed whitespace-pre-wrap">{complaint.description}</div>
+                        {complaint.image && (
+                          <div className="mt-3">
+                            <p className="font-semibold text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Attached Photo</p>
+                            <img
+                              src={complaint.image}
+                              className="max-h-40 w-auto object-contain rounded-lg border bg-white shadow-sm"
+                              alt="Grievance evidence"
+                            />
+                          </div>
+                        )}
                         {complaint.status !== 'resolved' && (
                           isApproved ? (
                             <button onClick={() => onResolve(complaint.id)}

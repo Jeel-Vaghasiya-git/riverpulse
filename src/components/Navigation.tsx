@@ -107,7 +107,7 @@ export default function Navigation() {
             className="flex items-center gap-2 rounded-full bg-white/90 dark:bg-slate-800/95 px-3 py-2 text-sm font-bold shadow-md ring-1 ring-black/5 backdrop-blur cursor-pointer text-[var(--river)] dark:text-white"
           >
             <Waves className="h-4 w-4 text-[var(--aqua)]" />
-            <span>RiverPulse<span className="text-[var(--aqua)]">India</span></span>
+            <span><span className="text-black dark:text-white">River</span><span className="text-[var(--aqua)]">Pulse</span><span className="text-black dark:text-white">India</span></span>
           </button>
           
           <div className="flex items-center gap-3">
