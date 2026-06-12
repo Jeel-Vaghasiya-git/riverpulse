@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex items-center justify-center gap-2 mb-4">
           <Waves className="h-5 w-5 text-[var(--aqua)]" />
           <span className="text-base font-bold text-white">
-            <span className="text-black">River</span><span className="text-[var(--aqua)]">Pulse</span><span className="text-[var(--aqua)]">India</span>
+            <span className="text-white">River</span><span className="text-[var(--aqua)]">Pulse</span><span className="text-white">India</span>
           </span>
         </div>
         <p className="text-xs text-white/80 mb-1">

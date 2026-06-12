@@ -95,7 +95,7 @@ export default function HomePage() {
             transition={{ duration: 0.9, delay: 0.1 }}
             className="mt-5 max-w-4xl text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl"
           >
-            <span className="text-black">River</span><span className="text-[var(--aqua)]">Pulse</span><span className="text-[var(--aqua)]">India</span>
+            <span className="text-white">River</span><span className="text-[var(--aqua)]">Pulse</span><span className="text-white">India</span>
           </motion.h1>
 
           <motion.p
