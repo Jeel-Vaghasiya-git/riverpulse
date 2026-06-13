@@ -124,7 +124,7 @@ export default function ComplaintsPage() {
     <div className="bg-[var(--slate-soft)] pt-28 pb-20 px-6 min-h-screen">
       <div className="mx-auto max-w-6xl">
         <header className="mb-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--aqua)]">Section 03</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--aqua)]">Section 04</p>
           <h1 className="mt-2 text-4xl font-bold text-[var(--river)] md:text-5xl">Citizen Channel</h1>
           <p className="mt-2 text-lg text-muted-foreground">Report pollution. Move the pulse forward.</p>
           <p className="mt-3 max-w-2xl rounded-lg border-l-4 border-[var(--aqua)] bg-white p-3 text-sm text-[var(--river)] shadow-sm">

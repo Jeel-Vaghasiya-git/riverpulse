@@ -85,7 +85,7 @@ export default function WaterBodiesMonitoring() {
     <div className="bg-[var(--slate-soft)] pt-28 pb-20 px-6 min-h-screen">
       <div className="mx-auto max-w-6xl">
         <header className="mb-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--aqua)]">Section 04</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--aqua)]">Section 03</p>
           <h1 className="mt-2 text-4xl font-bold text-[var(--river)] md:text-5xl">Water Bodies Live Monitoring</h1>
           <p className="mt-3 max-w-2xl text-muted-foreground">
             IoT lake telemetry dashboard showcasing real-time hardware sensor readings deployed at selected water bodies.
@@ -159,18 +159,18 @@ export default function WaterBodiesMonitoring() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ ...SPRING_CONFIG, delay: Math.min(0.5, 0.01 * i) }}
                 onClick={() => setSelectedLake(isSelected ? null : lake.id)}
-                className={`bg-white rounded-xl p-4 text-left transition hover:-translate-y-0.5 shadow-[var(--shadow-card)] ring-1 ring-black/5 border cursor-pointer ${
-                  isSelected ? 'border-[var(--aqua)] ring-2 ring-[var(--aqua)]/20' : isLive ? 'border-[var(--good)]/30' : 'border-slate-100'
+                className={`bg-white dark:bg-slate-800 rounded-xl p-4 text-left transition hover:-translate-y-0.5 shadow-[var(--shadow-card)] ring-1 ring-black/5 border dark:border-slate-700/50 cursor-pointer ${
+                  isSelected ? 'border-[var(--aqua)] ring-2 ring-[var(--aqua)]/20' : isLive ? 'border-[var(--good)]/30' : 'border-slate-100 dark:border-slate-800/40'
                 }`}
               >
                 <div className="flex items-start justify-between mb-2">
-                  <h4 className="font-semibold text-sm leading-tight text-[var(--river)] pr-2">{lake.name}</h4>
+                  <h4 className="font-semibold text-sm leading-tight text-[var(--river)] dark:text-white pr-2">{lake.name}</h4>
                   {isLive ? (
                     <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-[var(--good)]/10 text-[var(--good)] shrink-0">
                       <Wifi size={10} /> LIVE
                     </span>
                   ) : (
-                    <span className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 font-semibold uppercase shrink-0">
+                    <span className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 font-semibold uppercase shrink-0">
                       <WifiOff size={10} /> NOT ACTIVE
                     </span>
                   )}
@@ -181,22 +181,22 @@ export default function WaterBodiesMonitoring() {
                 
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
                   <span>{lake.area_acres} acres</span>
-                  <span className="font-mono text-[9px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-600 font-bold">ID: {lake.id}</span>
+                  <span className="font-mono text-[9px] bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded text-slate-600 dark:text-slate-400 font-bold">ID: {lake.id}</span>
                 </div>
 
                 {isLive && data && (
-                  <div className="grid grid-cols-3 gap-2 mt-4 pt-3 text-xs border-t border-slate-100">
+                  <div className="grid grid-cols-3 gap-2 mt-4 pt-3 text-xs border-t border-slate-100 dark:border-slate-700/50">
                     <div>
                       <span className="text-[10px] text-muted-foreground uppercase font-semibold">pH</span>
-                      <div className="font-bold text-[var(--river)]">{data.ph}</div>
+                      <div className="font-bold text-[var(--river)] dark:text-white">{data.ph}</div>
                     </div>
                     <div>
                       <span className="text-[10px] text-muted-foreground uppercase font-semibold">TDS</span>
-                      <div className="font-bold text-[var(--river)]">{data.tds}</div>
+                      <div className="font-bold text-[var(--river)] dark:text-white">{data.tds}</div>
                     </div>
                     <div>
                       <span className="text-[10px] text-muted-foreground uppercase font-semibold">Temp</span>
-                      <div className="font-bold text-[var(--river)]">{data.temperature}°</div>
+                      <div className="font-bold text-[var(--river)] dark:text-white">{data.temperature}°</div>
                     </div>
                   </div>
                 )}
@@ -217,16 +217,16 @@ export default function WaterBodiesMonitoring() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={SPRING_CONFIG}
-            className="mb-8 p-6 bg-white rounded-xl shadow-[var(--shadow-card)] ring-1 ring-black/5"
+            className="mb-8 p-6 bg-white dark:bg-slate-800 rounded-xl shadow-[var(--shadow-card)] ring-1 ring-black/5 border dark:border-slate-700/50"
           >
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+            <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-100 dark:border-slate-700/50">
               <div>
-                <h3 className="text-xl font-bold text-[var(--river)]">{selected.name}</h3>
-                <p className="text-xs text-muted-foreground mt-0.5">{selected.zone} Zone · {selected.area_acres} acres · Lake ID: <span className="font-mono bg-slate-100 px-1 py-0.5 rounded text-slate-700 font-semibold">{selected.id}</span></p>
+                <h3 className="text-xl font-bold text-[var(--river)] dark:text-white">{selected.name}</h3>
+                <p className="text-xs text-muted-foreground mt-0.5">{selected.zone} Zone · {selected.area_acres} acres · Lake ID: <span className="font-mono bg-slate-100 dark:bg-slate-900 px-1 py-0.5 rounded text-slate-700 dark:text-slate-300 font-semibold">{selected.id}</span></p>
               </div>
               <button
                 onClick={() => setSelectedLake(null)}
-                className="text-xs px-3 py-1.5 rounded-lg border border-input text-muted-foreground hover:bg-slate-50 transition-colors cursor-pointer"
+                className="text-xs px-3 py-1.5 rounded-lg border border-input dark:border-slate-700 text-muted-foreground dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-950 bg-white dark:bg-slate-800 transition-colors cursor-pointer"
               >
                 Close Details
               </button>
@@ -243,7 +243,7 @@ export default function WaterBodiesMonitoring() {
                   ].map((m) => (
                     <div
                       key={m.label}
-                      className="bg-white rounded-xl p-4 border shadow-sm flex flex-col justify-between"
+                      className="bg-white dark:bg-slate-900 rounded-xl p-4 border dark:border-slate-700/50 shadow-sm flex flex-col justify-between"
                       style={{ borderLeft: `4px solid ${m.safe ? 'var(--good)' : 'var(--critical)'}` }}
                     >
                       <div>
@@ -252,7 +252,7 @@ export default function WaterBodiesMonitoring() {
                           <span className="font-semibold">{m.label}</span>
                         </div>
                         <div className="flex items-baseline gap-1 mt-1">
-                          <span className="text-2xl font-bold text-[var(--river)]">{m.value}</span>
+                          <span className="text-2xl font-bold text-[var(--river)] dark:text-white">{m.value}</span>
                           <span className="text-[10px] font-semibold text-muted-foreground">{m.unit}</span>
                         </div>
                       </div>
@@ -267,20 +267,20 @@ export default function WaterBodiesMonitoring() {
 
                 <div className="mt-6 p-4 bg-[var(--slate-soft)] rounded-lg text-center text-xs text-muted-foreground">
                   <p>Last transmission received: {new Date(selectedData.timestamp).toLocaleString('en-IN')}</p>
-                  <p className="mt-1 opacity-75">Configured Node: hardware sensor stream synced via Firebase Realtime Database path: <code className="font-mono bg-white px-1.5 py-0.5 rounded">sensors/{selected.id}/latest</code></p>
+                  <p className="mt-1 opacity-75">Configured Node: hardware sensor stream synced via Firebase Realtime Database path: <code className="font-mono bg-white dark:bg-slate-900 px-1.5 py-0.5 rounded text-[var(--river)] dark:text-slate-200">sensors/{selected.id}/latest</code></p>
                 </div>
               </>
             ) : (
-              <div className="p-6 bg-slate-50 border border-dashed rounded-xl text-center">
+              <div className="p-6 bg-slate-50 dark:bg-slate-900/30 border border-dashed dark:border-slate-700 rounded-xl text-center">
                 <WifiOff className="mx-auto mb-3 text-muted-foreground" size={36} />
-                <h4 className="font-semibold text-sm text-[var(--river)] mb-1">No Active Telemetry Connection</h4>
+                <h4 className="font-semibold text-sm text-[var(--river)] dark:text-white mb-1">No Active Telemetry Connection</h4>
                 <p className="text-xs text-muted-foreground max-w-md mx-auto mb-4">
                   This lake is currently inactive. Setup your IoT hardware device to upload live water telemetry to this station.
                 </p>
-                <div className="max-w-md mx-auto text-left bg-white p-4 rounded-lg border text-xs text-[var(--river)] space-y-2.5">
-                  <p className="font-bold border-b pb-1 text-[10px] uppercase tracking-wider text-muted-foreground">IoT Setup Instructions</p>
-                  <p>1. Target Realtime Database Endpoint: <code className="font-mono bg-slate-100 px-1 py-0.5 rounded">https://riverpulse-e15de-default-rtdb.asia-southeast1.firebasedatabase.app</code></p>
-                  <p>2. Upload Path: <code className="font-mono bg-slate-100 px-1 py-0.5 rounded">sensors/{selected.id}/latest</code></p>
+                <div className="max-w-md mx-auto text-left bg-white dark:bg-slate-900/60 p-4 rounded-lg border dark:border-slate-700 text-xs text-[var(--river)] dark:text-slate-300 space-y-2.5">
+                  <p className="font-bold border-b dark:border-slate-800 pb-1 text-[10px] uppercase tracking-wider text-muted-foreground">IoT Setup Instructions</p>
+                  <p>1. Target Realtime Database Endpoint: <code className="font-mono bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-[var(--river)] dark:text-slate-200 break-all">https://riverpulse-e15de-default-rtdb.asia-southeast1.firebasedatabase.app</code></p>
+                  <p>2. Upload Path: <code className="font-mono bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-[var(--river)] dark:text-slate-200">sensors/{selected.id}/latest</code></p>
                   <p>3. Required JSON Payload Fields:</p>
                   <pre className="bg-slate-800 text-slate-200 p-2.5 rounded-md font-mono text-[10px] overflow-x-auto">
 {`{
@@ -291,7 +291,7 @@ export default function WaterBodiesMonitoring() {
   "timestamp": 1780900000000
 }`}
                   </pre>
-                  <p className="text-[10px] text-muted-foreground mt-1">Note: <code className="font-mono">timestamp</code> should be epoch milliseconds (e.g. from NTP server).</p>
+                  <p className="text-[10px] text-muted-foreground mt-1">Note: <code className="font-mono bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded">timestamp</code> should be epoch milliseconds (e.g. from NTP server).</p>
                 </div>
               </div>
             )}

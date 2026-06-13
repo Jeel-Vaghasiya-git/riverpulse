@@ -21,7 +21,7 @@ export default function Disclaimer() {
           </p>
         </div>
         <div className="mt-4 text-center text-xs font-bold text-[var(--river)] opacity-60">
-          <span><span className="text-black">River</span><span className="text-[var(--aqua)]">Pulse</span><span className="text-black">India</span></span>
+          <span><span className="text-black dark:text-white">River</span><span className="text-[var(--aqua)]">Pulse</span><span className="text-black dark:text-white">India</span></span>
         </div>
       </div>
     </section>

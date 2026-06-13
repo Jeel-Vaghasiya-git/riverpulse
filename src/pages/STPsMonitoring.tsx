@@ -104,7 +104,7 @@ export default function STPsMonitoring() {
       <div className="mx-auto max-w-6xl">
         <header className="mb-10">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--aqua)]">Section 02</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--aqua)]">Section 01</p>
             <h1 className="mt-2 text-4xl font-bold text-[var(--river)] md:text-5xl">STPs Live Monitoring</h1>
             <p className="mt-3 max-w-2xl text-muted-foreground">
               Real-time telemetry feeds connected directly to the GangaPulse OCEMS API.
