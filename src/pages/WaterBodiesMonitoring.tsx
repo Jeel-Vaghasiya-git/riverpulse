@@ -64,7 +64,7 @@ export default function WaterBodiesMonitoring() {
       const matchesZone = selectedZone ? lake.zone === selectedZone : true;
       
       const data = sensorData[lake.id];
-      const isLive = !!(data && data.timestamp && (Date.now() - data.timestamp < 300000) && data.timestamp > 1000000000000);
+      const isLive = !!(data && data.timestamp && (Date.now() - data.timestamp < 300000 || data.timestamp < 1000000000000));
       
       const matchesIot = filterIot === null ? true : filterIot ? isLive : !isLive;
       return matchesSearch && matchesZone && matchesIot;
@@ -73,11 +73,11 @@ export default function WaterBodiesMonitoring() {
 
   const selected = LAKES_DATA.find(l => l.id === selectedLake);
   const selectedData = selectedLake ? sensorData[selectedLake] : null;
-  const isSelectedLakeLive = !!(selectedData && selectedData.timestamp && (Date.now() - selectedData.timestamp < 300000) && selectedData.timestamp > 1000000000000);
+  const isSelectedLakeLive = !!(selectedData && selectedData.timestamp && (Date.now() - selectedData.timestamp < 300000 || selectedData.timestamp < 1000000000000));
 
   const activeIoTCount = useMemo(() => {
     return Object.values(sensorData).filter(
-      (data) => data && data.timestamp && (Date.now() - data.timestamp < 300000) && data.timestamp > 1000000000000
+      (data) => data && data.timestamp && (Date.now() - data.timestamp < 300000 || data.timestamp < 1000000000000)
     ).length;
   }, [sensorData]);
 
@@ -167,7 +167,7 @@ export default function WaterBodiesMonitoring() {
                   <h4 className="font-semibold text-sm leading-tight text-[var(--river)] dark:text-white pr-2">{lake.name}</h4>
                   {isLive ? (
                     <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-[var(--good)]/10 text-[var(--good)] shrink-0">
-                      <Wifi size={10} /> LIVE
+                      <Wifi size={10} /> ACTIVE
                     </span>
                   ) : (
                     <span className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 font-semibold uppercase shrink-0">
@@ -268,7 +268,7 @@ export default function WaterBodiesMonitoring() {
                 <div className="mt-6 p-4 bg-[var(--slate-soft)] rounded-lg text-center text-xs text-muted-foreground space-y-1">
                   <p>
                     Status: {isSelectedLakeLive ? (
-                      <span className="text-[var(--good)] font-bold">● Live</span>
+                      <span className="text-[var(--good)] font-bold">● Active</span>
                     ) : (
                       <span className="text-[var(--critical)] font-bold">● Offline / Outdated</span>
                     )}
