@@ -418,6 +418,6 @@ export const LAKES_DATA: Lake[] = [
   { id: 'lk-130', name: 'Vishwaneedum Lake', zone: 'R.R.Nagar', ward: 'R.R.Nagar Division', area_acres: 175, lat: 12.92, lng: 77.575, iot_enabled: false },
   { id: 'lk-084', name: 'Yalahanka Lake', zone: 'Yelahanka', ward: 'Yelahanka Division', area_acres: 103, lat: 12.956, lng: 77.51, iot_enabled: true },
   { id: 'lk-048', name: 'Yediyur Lake', zone: 'South', ward: 'South Division', area_acres: 101, lat: 12.932, lng: 77.72, iot_enabled: false },
-  { id: 'lk-108', name: 'Yelenahalli Lake', zone: 'Bommanahalli', ward: 'Bommanahalli Division', area_acres: 21, lat: 12.972, lng: 77.62, iot_enabled: false }
+  { id: 'lk-108', name: 'Yelenahalli Lake', zone: 'Bommanahalli', ward: 'Bommanahalli Division', area_acres: 21, lat: 12.972, lng: 77.62, iot_enabled: true }
 ];
 

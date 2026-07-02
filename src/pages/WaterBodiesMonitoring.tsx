@@ -64,7 +64,7 @@ export default function WaterBodiesMonitoring() {
       const matchesZone = selectedZone ? lake.zone === selectedZone : true;
       
       const data = sensorData[lake.id];
-      const isLive = !!(data && data.timestamp && (Date.now() - data.timestamp < 300000));
+      const isLive = !!(data && data.timestamp && (Date.now() - data.timestamp < 300000) && data.timestamp > 1000000000000);
       
       const matchesIot = filterIot === null ? true : filterIot ? isLive : !isLive;
       return matchesSearch && matchesZone && matchesIot;
@@ -73,11 +73,11 @@ export default function WaterBodiesMonitoring() {
 
   const selected = LAKES_DATA.find(l => l.id === selectedLake);
   const selectedData = selectedLake ? sensorData[selectedLake] : null;
-  const isSelectedLakeLive = !!(selectedData && selectedData.timestamp && (Date.now() - selectedData.timestamp < 300000));
+  const isSelectedLakeLive = !!(selectedData && selectedData.timestamp && (Date.now() - selectedData.timestamp < 300000) && selectedData.timestamp > 1000000000000);
 
   const activeIoTCount = useMemo(() => {
     return Object.values(sensorData).filter(
-      (data) => data && data.timestamp && (Date.now() - data.timestamp < 300000)
+      (data) => data && data.timestamp && (Date.now() - data.timestamp < 300000) && data.timestamp > 1000000000000
     ).length;
   }, [sensorData]);
 
@@ -184,7 +184,7 @@ export default function WaterBodiesMonitoring() {
                   <span className="font-mono text-[9px] bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded text-slate-600 dark:text-slate-400 font-bold">ID: {lake.id}</span>
                 </div>
 
-                {isLive && data && (
+                {data && (
                   <div className="grid grid-cols-3 gap-2 mt-4 pt-3 text-xs border-t border-slate-100 dark:border-slate-700/50">
                     <div>
                       <span className="text-[10px] text-muted-foreground uppercase font-semibold">pH</span>
@@ -232,7 +232,7 @@ export default function WaterBodiesMonitoring() {
               </button>
             </div>
 
-            {isSelectedLakeLive && selectedData ? (
+            {selectedData ? (
               <>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {[
@@ -265,8 +265,21 @@ export default function WaterBodiesMonitoring() {
                   ))}
                 </div>
 
-                <div className="mt-6 p-4 bg-[var(--slate-soft)] rounded-lg text-center text-xs text-muted-foreground">
-                  <p>Last transmission received: {new Date(selectedData.timestamp).toLocaleString('en-IN')}</p>
+                <div className="mt-6 p-4 bg-[var(--slate-soft)] rounded-lg text-center text-xs text-muted-foreground space-y-1">
+                  <p>
+                    Status: {isSelectedLakeLive ? (
+                      <span className="text-[var(--good)] font-bold">● Live</span>
+                    ) : (
+                      <span className="text-[var(--critical)] font-bold">● Offline / Outdated</span>
+                    )}
+                  </p>
+                  <p>
+                    Last transmission received: {selectedData.timestamp > 1000000000000 ? (
+                      new Date(selectedData.timestamp).toLocaleString('en-IN')
+                    ) : (
+                      `uptime: ${Math.round(selectedData.timestamp / 1000)}s (Device requires NTP configuration)`
+                    )}
+                  </p>
                   <p className="mt-1 opacity-75">Configured Node: hardware sensor stream synced via Firebase Realtime Database path: <code className="font-mono bg-white dark:bg-slate-900 px-1.5 py-0.5 rounded text-[var(--river)] dark:text-slate-200">sensors/{selected.id}/latest</code></p>
                 </div>
               </>
