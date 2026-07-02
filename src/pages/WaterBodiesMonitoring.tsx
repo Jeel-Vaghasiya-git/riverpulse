@@ -64,7 +64,7 @@ export default function WaterBodiesMonitoring() {
       const matchesZone = selectedZone ? lake.zone === selectedZone : true;
       
       const data = sensorData[lake.id];
-      const isLive = !!(data && data.timestamp && (Date.now() - data.timestamp < 300000 || data.timestamp < 1000000000000));
+      const isLive = !!(data && data.timestamp && (Date.now() - data.timestamp < 120000 || data.timestamp < 1000000000000));
       
       const matchesIot = filterIot === null ? true : filterIot ? isLive : !isLive;
       return matchesSearch && matchesZone && matchesIot;
@@ -73,11 +73,11 @@ export default function WaterBodiesMonitoring() {
 
   const selected = LAKES_DATA.find(l => l.id === selectedLake);
   const selectedData = selectedLake ? sensorData[selectedLake] : null;
-  const isSelectedLakeLive = !!(selectedData && selectedData.timestamp && (Date.now() - selectedData.timestamp < 300000 || selectedData.timestamp < 1000000000000));
+  const isSelectedLakeLive = !!(selectedData && selectedData.timestamp && (Date.now() - selectedData.timestamp < 120000 || selectedData.timestamp < 1000000000000));
 
   const activeIoTCount = useMemo(() => {
     return Object.values(sensorData).filter(
-      (data) => data && data.timestamp && (Date.now() - data.timestamp < 300000 || data.timestamp < 1000000000000)
+      (data) => data && data.timestamp && (Date.now() - data.timestamp < 120000 || data.timestamp < 1000000000000)
     ).length;
   }, [sensorData]);
 
@@ -149,7 +149,7 @@ export default function WaterBodiesMonitoring() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
           {filteredLakes.map((lake, i) => {
             const data = sensorData[lake.id];
-            const isLive = !!(data && data.timestamp && (Date.now() - data.timestamp < 300000));
+            const isLive = !!(data && data.timestamp && (Date.now() - data.timestamp < 120000 || data.timestamp < 1000000000000));
             const isSelected = selectedLake === lake.id;
 
             return (
