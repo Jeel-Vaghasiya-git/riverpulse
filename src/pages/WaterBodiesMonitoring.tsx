@@ -16,10 +16,42 @@ interface SensorReading {
 export default function WaterBodiesMonitoring() {
   const [selectedLake, setSelectedLake] = useState<string | null>(null);
   const [sensorData, setSensorData] = useState<Record<string, SensorReading>>({});
-  
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedZone, setSelectedZone] = useState('');
   const [filterIot, setFilterIot] = useState<boolean | null>(null);
+
+  const [changeTracker, setChangeTracker] = useState<Record<string, { timestamp: number; lastChangedAt: number }>>(() => {
+    try {
+      const saved = localStorage.getItem('riverpulse_sensor_tracker');
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  const [tick, setTick] = useState(0);
+
+  // Force tick to trigger re-renders every 10 seconds for real-time offline countdown
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTick(t => t + 1);
+    }, 10000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const getIsLakeLive = (lakeId: string, data: SensorReading | undefined) => {
+    if (!data || !data.timestamp) return false;
+    // Case 1: If it's a real epoch timestamp
+    if (data.timestamp > 1000000000000) {
+      return Date.now() - data.timestamp < 120000;
+    }
+    // Case 2: If it's a relative timestamp (like millis()), check when the value last changed
+    const tracker = changeTracker[lakeId];
+    if (tracker) {
+      return Date.now() - tracker.lastChangedAt < 120000;
+    }
+    return false;
+  };
 
   // Subscribe to all live sensors in Realtime Database
   useEffect(() => {
@@ -28,6 +60,39 @@ export default function WaterBodiesMonitoring() {
       const val = snapshot.val();
       if (val) {
         const parsed: Record<string, SensorReading> = {};
+        const now = Date.now();
+        
+        setChangeTracker((prev) => {
+          const next = { ...prev };
+          let changed = false;
+          
+          Object.entries(val).forEach(([lakeId, deviceData]) => {
+            const typedDevice = deviceData as any;
+            if (typedDevice && typedDevice.latest) {
+              const latest = typedDevice.latest;
+              const ts = Number(latest.timestamp);
+              
+              if (!prev[lakeId] || prev[lakeId].timestamp !== ts) {
+                next[lakeId] = {
+                  timestamp: ts,
+                  lastChangedAt: now
+                };
+                changed = true;
+              }
+            }
+          });
+          
+          if (changed) {
+            try {
+              localStorage.setItem('riverpulse_sensor_tracker', JSON.stringify(next));
+            } catch (e) {
+              console.warn(e);
+            }
+            return next;
+          }
+          return prev;
+        });
+
         Object.entries(val).forEach(([lakeId, deviceData]) => {
           const typedDevice = deviceData as any;
           if (typedDevice && typedDevice.latest) {
@@ -64,22 +129,23 @@ export default function WaterBodiesMonitoring() {
       const matchesZone = selectedZone ? lake.zone === selectedZone : true;
       
       const data = sensorData[lake.id];
-      const isLive = !!(data && data.timestamp && (Date.now() - data.timestamp < 120000 || data.timestamp < 1000000000000));
+      const isLive = getIsLakeLive(lake.id, data);
       
       const matchesIot = filterIot === null ? true : filterIot ? isLive : !isLive;
       return matchesSearch && matchesZone && matchesIot;
     });
-  }, [searchTerm, selectedZone, filterIot, sensorData]);
+  }, [searchTerm, selectedZone, filterIot, sensorData, changeTracker, tick]);
 
   const selected = LAKES_DATA.find(l => l.id === selectedLake);
   const selectedData = selectedLake ? sensorData[selectedLake] : null;
-  const isSelectedLakeLive = !!(selectedData && selectedData.timestamp && (Date.now() - selectedData.timestamp < 120000 || selectedData.timestamp < 1000000000000));
+  const isSelectedLakeLive = getIsLakeLive(selectedLake || '', selectedData || undefined);
 
   const activeIoTCount = useMemo(() => {
-    return Object.values(sensorData).filter(
-      (data) => data && data.timestamp && (Date.now() - data.timestamp < 120000 || data.timestamp < 1000000000000)
-    ).length;
-  }, [sensorData]);
+    return LAKES_DATA.filter(lake => {
+      const data = sensorData[lake.id];
+      return getIsLakeLive(lake.id, data);
+    }).length;
+  }, [sensorData, changeTracker, tick]);
 
   return (
     <div className="bg-[var(--slate-soft)] pt-28 pb-20 px-6 min-h-screen">
@@ -149,7 +215,7 @@ export default function WaterBodiesMonitoring() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
           {filteredLakes.map((lake, i) => {
             const data = sensorData[lake.id];
-            const isLive = !!(data && data.timestamp && (Date.now() - data.timestamp < 120000 || data.timestamp < 1000000000000));
+            const isLive = getIsLakeLive(lake.id, data);
             const isSelected = selectedLake === lake.id;
 
             return (
